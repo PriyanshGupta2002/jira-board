@@ -24,8 +24,10 @@ import {
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { signUpFormSchema } from "@/features/schema";
+import { useRegister } from "../api/use-register";
 
 const SignUpCard = () => {
+  const { mutate } = useRegister();
   const form = useForm<z.infer<typeof signUpFormSchema>>({
     resolver: zodResolver(signUpFormSchema),
     defaultValues: {
@@ -35,9 +37,9 @@ const SignUpCard = () => {
     },
   });
   function onSubmit(values: z.infer<typeof signUpFormSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    mutate({
+      json: values,
+    });
   }
 
   return (

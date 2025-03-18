@@ -21,6 +21,7 @@ import { useLogin } from "../api/use-login";
 
 const SignInCard = () => {
   const { mutate } = useLogin();
+
   const form = useForm<z.infer<typeof signInFormSchema>>({
     resolver: zodResolver(signInFormSchema),
     defaultValues: {
@@ -32,7 +33,6 @@ const SignInCard = () => {
     mutate({
       json: values,
     });
-    console.log("hi");
   }
   return (
     <Card className="w-full h-full md:w-[487px] border-none shadow-none">
